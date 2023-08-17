@@ -1,17 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_user/util/globalStyle.dart';
 
-class TextInput extends StatelessWidget {
+class TextInput extends StatefulWidget {
   const TextInput(
       {super.key,
       required this.placeHolder,
       required this.title,
       this.iconData,
-      this.isIcon = false});
+      this.isIcon = false,
+      this.context});
   final String placeHolder;
   final String title;
   final bool isIcon;
   final IconData? iconData;
+  final BuildContext? context;
+
+  @override
+  State<TextInput> createState() => _TextInputState();
+}
+
+class _TextInputState extends State<TextInput> {
+  void _openCalendarPicker() async {
+    DateTime? selectedDate = await showDatePicker(
+        context: widget.context!,
+        initialDate: DateTime.now(),
+        firstDate: DateTime(2023),
+        lastDate: DateTime(2025));
+    debugPrint(selectedDate.toString());
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +35,7 @@ class TextInput extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          title,
+          widget.title,
           style: const TextStyle(
               color: Color.fromRGBO(174, 174, 174, 1),
               fontWeight: FontWeight.w700,
@@ -28,7 +44,7 @@ class TextInput extends StatelessWidget {
         const SizedBox(
           height: 5,
         ),
-        isIcon
+        widget.isIcon
             ? Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -43,23 +59,26 @@ class TextInput extends StatelessWidget {
                       child: TextField(
                         decoration: InputDecoration(
                             border: InputBorder.none,
-                            hintText: placeHolder,
+                            hintText: widget.placeHolder,
                             hintStyle: const TextStyle(
                                 color: Color.fromRGBO(207, 207, 207, 1))),
                       ),
                     ),
                   ),
-                  Container(
-                    width: 52,
-                    height: 48,
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                        color: blueColor,
-                        borderRadius: const BorderRadius.only(
-                            topRight: Radius.circular(20),
-                            bottomRight: Radius.circular(20))),
-                    child: Icon(iconData, color: Colors.white, size: 24),
-                  )
+                  InkWell(
+                      onTap: _openCalendarPicker,
+                      child: Container(
+                        width: 52,
+                        height: 48,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                            color: blueColor,
+                            borderRadius: const BorderRadius.only(
+                                topRight: Radius.circular(20),
+                                bottomRight: Radius.circular(20))),
+                        child: Icon(widget.iconData,
+                            color: Colors.white, size: 24),
+                      ))
                 ],
               )
             : Container(
@@ -71,7 +90,7 @@ class TextInput extends StatelessWidget {
                 child: TextField(
                   decoration: InputDecoration(
                       border: InputBorder.none,
-                      hintText: placeHolder,
+                      hintText: widget.placeHolder,
                       hintStyle: const TextStyle(
                           color: Color.fromRGBO(207, 207, 207, 1))),
                 ),

@@ -60,11 +60,12 @@ class ProfileScreen extends StatelessWidget {
                   const SizedBox(
                     height: 15,
                   ),
-                  const TextInput(
+                  TextInput(
                     placeHolder: 'DD/MM/YYYY',
                     title: 'NGÀY THÁNG NĂM SINH',
                     isIcon: true,
                     iconData: Icons.health_and_safety,
+                    context: context,
                   ),
                   const SizedBox(
                     height: 15,
