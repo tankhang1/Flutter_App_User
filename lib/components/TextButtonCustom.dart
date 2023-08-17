@@ -1,22 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class TextButtonCustom extends StatelessWidget {
   const TextButtonCustom(
       {super.key,
       required this.width,
       required this.title,
-      required this.formState});
+      this.formState,
+      required this.actionLink});
   final double width;
   final String title;
-  final GlobalKey<FormState> formState;
+  final GlobalKey<FormState>? formState;
+  final String actionLink;
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        debugPrint(formState.currentState?.validate().toString());
         // if (formState.currentState.validate()) {
         //   debugPrint('Bug');
         // }
+        debugPrint('go to OTP Screen');
+        context.go(actionLink);
       },
       child: Container(
         width: width,
@@ -34,7 +38,8 @@ class TextButtonCustom extends StatelessWidget {
             ]),
         child: Text(
           title,
-          style: const TextStyle(color: Colors.white, fontSize: 16),
+          style: const TextStyle(
+              color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600),
         ),
       ),
     );
