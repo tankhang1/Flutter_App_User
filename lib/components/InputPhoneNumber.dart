@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_user/components/PhoneNumberFormatter.dart';
+import 'BottomSheetCustom.dart';
 
 class InputPhoneNumber extends StatefulWidget {
   const InputPhoneNumber(
@@ -14,9 +15,17 @@ class InputPhoneNumber extends StatefulWidget {
 
 class _InputPhoneNumber extends State<InputPhoneNumber> {
   final String error = '';
+
   @override
   Widget build(BuildContext context) {
     final widthScreen = MediaQuery.of(context).size.width;
+    void showBottomSheet() {
+      showModalBottomSheet(
+          context: context,
+          builder: (context) => const BottomSheetCustom(),
+          isScrollControlled: true);
+    }
+
     return Form(
         key: widget.formState,
         child: SizedBox(
@@ -24,41 +33,45 @@ class _InputPhoneNumber extends State<InputPhoneNumber> {
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Container(
-                  width: widthScreen * 0.8 * 0.3,
-                  height: 50,
-                  decoration: const BoxDecoration(
-                      color: Color.fromRGBO(58, 126, 252, 1),
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(20),
-                          bottomLeft: Radius.circular(20))),
-                  child: Center(
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        ClipOval(
-                          child: Image.network(
-                            'https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Flag_of_Vietnam.svg/1200px-Flag_of_Vietnam.svg.png',
-                            width: 25,
-                            height: 25,
-                            fit: BoxFit.cover,
+              InkWell(
+                onTap: showBottomSheet,
+                child: Container(
+                    width: widthScreen * 0.8 * 0.3,
+                    height: 50,
+                    decoration: const BoxDecoration(
+                        color: Color.fromRGBO(58, 126, 252, 1),
+                        borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(20),
+                            bottomLeft: Radius.circular(20))),
+                    child: Center(
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          ClipOval(
+                            child: Image.network(
+                              'https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Flag_of_Vietnam.svg/1200px-Flag_of_Vietnam.svg.png',
+                              width: 25,
+                              height: 25,
+                              fit: BoxFit.cover,
+                            ),
                           ),
-                        ),
-                        const SizedBox(
-                          width: 5,
-                        ),
-                        const Text(
-                          '+84',
-                          style: TextStyle(
-                              color: Colors.white, fontWeight: FontWeight.bold),
-                        ),
-                        const Icon(
-                          Icons.arrow_drop_down,
-                          color: Colors.white,
-                        )
-                      ],
-                    ),
-                  )),
+                          const SizedBox(
+                            width: 5,
+                          ),
+                          const Text(
+                            '+84',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          const Icon(
+                            Icons.arrow_drop_down,
+                            color: Colors.white,
+                          )
+                        ],
+                      ),
+                    )),
+              ),
               Expanded(
                 child: Container(
                     padding: const EdgeInsets.only(left: 10),
