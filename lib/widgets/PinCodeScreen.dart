@@ -1,13 +1,35 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app_user/components/OTPVerificationInput.dart';
 import 'package:flutter_app_user/components/PinCodeKeyBoard.dart';
+import 'package:flutter_app_user/components/SecurityVerficationInput.dart';
 import 'package:flutter_app_user/util/globalStyle.dart';
 import 'package:go_router/go_router.dart';
 
-final listOTP = [1, 2, 3, 4, 5, 6].map((e) => TextEditingController());
-
-class PinCodeScreen extends StatelessWidget {
+class PinCodeScreen extends StatefulWidget {
   const PinCodeScreen({super.key});
+
+  @override
+  State<StatefulWidget> createState() {
+    return _PinCodeScreen();
+  }
+}
+
+class _PinCodeScreen extends State<PinCodeScreen> {
+  List<String> listPinCode = [];
+  void addListPinCode(String pinCode) {
+    setState(() {
+      if (listPinCode.length < 6) {
+        listPinCode.add(pinCode);
+      }
+    });
+  }
+
+  void removeListPinCode() {
+    setState(() {
+      if (listPinCode.isNotEmpty) {
+        listPinCode.removeLast();
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,6 +41,9 @@ class PinCodeScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            const SizedBox(
+              height: 50,
+            ),
             IconButton(
                 onPressed: () {
                   context.pop(true);
@@ -38,11 +63,16 @@ class PinCodeScreen extends StatelessWidget {
               'Tạo một mã PIN giúp bảo vệ tài khoản của bạn khỏi bị truy cập trái phép',
               style: TextStyle(color: Colors.black),
             ),
-            OTPVerificationInput(listOTP: listOTP),
             const SizedBox(
-              height: 10,
+              height: 20,
             ),
-            const PinCodeKeyBoard(),
+            SecurityVerificationInput(listSecurityCode: listPinCode),
+            const SizedBox(
+              height: 50,
+            ),
+            PinCodeKeyBoard(
+                addListPinCode: addListPinCode,
+                removeListPinCode: removeListPinCode),
           ],
         ),
       )),

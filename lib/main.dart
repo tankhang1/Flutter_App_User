@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_user/widgets/OnboardScreen.dart';
 import 'package:flutter_app_user/widgets/PinCodeScreen.dart';
 import 'package:flutter_app_user/widgets/ProfileScreen.dart';
 import 'package:flutter_app_user/widgets/SignUpOTP.dart';
@@ -28,6 +29,10 @@ final _router = GoRouter(routes: <RouteBase>[
                     ),
                   ])
             ]),
+        GoRoute(
+          path: 'OnBoarding',
+          builder: (context, state) => const OnBoardScreen(),
+        )
       ]),
 ]);
 
