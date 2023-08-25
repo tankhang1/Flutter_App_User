@@ -21,3 +21,7 @@ flutter:
   assets:
     - assets/images/Icon.png
     - assets/images/Online.png
+    - assets/images/Child.png
+    - assets/images/Partner.png
+    - assets/images/Process.png
+    - assets/images/Account.png
