@@ -9,6 +9,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_svg: ^2.0.7
   go_router: ^10.0.0
 
 dev_dependencies:
@@ -25,3 +26,13 @@ flutter:
     - assets/images/Partner.png
     - assets/images/Process.png
     - assets/images/Account.png
+    - assets/images/Background.png
+    - assets/images/Card-2.png
+
+    - assets/images/home/Auto.svg
+    - assets/images/home/Bike.svg
+    - assets/images/home/House.svg
+    - assets/images/home/House.svg
+    - assets/images/home/Personal.svg
+    - assets/images/home/Private.svg
+    - assets/images/home/Travel.svg

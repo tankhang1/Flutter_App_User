@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_user/widgets/HomeScreen/HomeScreen.dart';
 import 'package:flutter_app_user/widgets/OnboardScreen.dart';
 import 'package:flutter_app_user/widgets/PinCodeScreen.dart';
 import 'package:flutter_app_user/widgets/ProfileScreen.dart';
@@ -32,6 +33,10 @@ final _router = GoRouter(routes: <RouteBase>[
         GoRoute(
           path: 'OnBoarding',
           builder: (context, state) => const OnBoardScreen(),
+        ),
+        GoRoute(
+          path: 'Home',
+          builder: (context, state) => const HomeScreen(),
         )
       ]),
 ]);

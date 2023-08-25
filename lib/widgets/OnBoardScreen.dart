@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_user/models/OnBoardingModal.dart';
 import 'package:flutter_app_user/util/globalStyle.dart';
+import 'package:go_router/go_router.dart';
 
 final listOnBoarding = [
   OnBoardingModal('assets/images/Online.png', '100% Trực Tuyến',
@@ -16,14 +17,18 @@ final listOnBoarding = [
 ];
 
 class FooterOnBoarding extends StatelessWidget {
-  const FooterOnBoarding({super.key, required this.nextCarousel});
+  const FooterOnBoarding(
+      {super.key, required this.nextCarousel, required this.pageController});
   final void Function(int?) nextCarousel;
+  final PageController pageController;
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
         TextButton(
-            onPressed: () {},
+            onPressed: () {
+              context.push(('/Home'));
+            },
             child: const Text('Bỏ Qua',
                 style: TextStyle(
                     color: Color.fromRGBO(7, 75, 201, 1),
@@ -31,7 +36,12 @@ class FooterOnBoarding extends StatelessWidget {
                     fontWeight: FontWeight.w600))),
         const Spacer(),
         TextButton(
-            onPressed: () => nextCarousel(null),
+            onPressed: () {
+              nextCarousel(null);
+              pageController.nextPage(
+                  duration: const Duration(milliseconds: 300),
+                  curve: Curves.linear);
+            },
             child: const Text('TIẾP TỤC',
                 style: TextStyle(
                     color: Color.fromRGBO(7, 75, 201, 1),
@@ -44,29 +54,18 @@ class FooterOnBoarding extends StatelessWidget {
 
 class CarouselSlider extends StatefulWidget {
   const CarouselSlider(
-      {super.key, required this.nextCarousel, required this.currentPage});
+      {super.key,
+      required this.nextCarousel,
+      required this.currentPage,
+      required this.pageController});
   final void Function(int) nextCarousel;
   final int currentPage;
+  final PageController pageController;
   @override
   State<CarouselSlider> createState() => _CarouselSliderState();
 }
 
 class _CarouselSliderState extends State<CarouselSlider> {
-  late PageController pageController;
-
-  @override
-  void initState() {
-    super.initState();
-    pageController = PageController(initialPage: widget.currentPage);
-  }
-
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
-    pageController.dispose();
-  }
-
   Widget carouselIndicator(int index) {
     return AnimatedContainer(
         duration: const Duration(milliseconds: 500),
@@ -129,7 +128,7 @@ class _CarouselSliderState extends State<CarouselSlider> {
             height: 500,
             child: PageView.builder(
               onPageChanged: (value) => widget.nextCarousel(value),
-              controller: pageController,
+              controller: widget.pageController,
               itemCount: listOnBoarding.length,
               itemBuilder: (context, index) {
                 return carouselCard(listOnBoarding[index]);
@@ -162,6 +161,21 @@ class OnBoardScreen extends StatefulWidget {
 
 class _OnBoardScreenState extends State<OnBoardScreen> {
   int currentPage = 0;
+  late PageController pageController;
+
+  @override
+  void initState() {
+    super.initState();
+    pageController = PageController(initialPage: currentPage);
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    pageController.dispose();
+  }
+
   void nextCarousel(int? index) {
     setState(() {
       currentPage = index ?? currentPage + 1;
@@ -181,10 +195,12 @@ class _OnBoardScreenState extends State<OnBoardScreen> {
               CarouselSlider(
                 nextCarousel: nextCarousel,
                 currentPage: currentPage,
+                pageController: pageController,
               ),
               const Spacer(),
               FooterOnBoarding(
                 nextCarousel: nextCarousel,
+                pageController: pageController,
               ),
               const SizedBox(
                 height: 35,
