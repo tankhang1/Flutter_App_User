@@ -36,3 +36,7 @@ flutter:
     - assets/images/home/Personal.svg
     - assets/images/home/Private.svg
     - assets/images/home/Travel.svg
+    - assets/images/home/Coin.png
+    - assets/images/home/Document.png
+    - assets/images/home/Product.png
+    - assets/images/home/Product_2.png
