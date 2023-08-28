@@ -13,15 +13,27 @@ class Tool extends StatelessWidget {
   Widget build(BuildContext context) {
     return FittedBox(
       child: Container(
-        constraints: const BoxConstraints(minWidth: 150, maxWidth: 250),
+        constraints: const BoxConstraints(minWidth: 150, maxWidth: 200),
         margin: const EdgeInsets.all(10),
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16),
             color: const Color.fromRGBO(233, 233, 233, 1)),
         child: ListTile(
-          title: Text(title),
-          subtitle: Text(subTitle),
+          title: Text(
+            title,
+            style: const TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.w600,
+                color: Color.fromRGBO(0, 0, 0, 1)),
+          ),
+          subtitle: Text(
+            subTitle,
+            style: const TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w700,
+                color: Color.fromRGBO(0, 0, 0, 1)),
+          ),
           trailing: Image(image: AssetImage(linkImage)),
         ),
       ),

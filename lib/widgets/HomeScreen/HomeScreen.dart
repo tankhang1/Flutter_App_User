@@ -1,4 +1,7 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_app_user/components/BlurHeader.dart';
 import 'package:flutter_app_user/widgets/HomeScreen/components/CategoriesHorizontal.dart';
 import 'package:flutter_app_user/widgets/HomeScreen/components/HeaderComponent.dart';
 import 'package:flutter_app_user/widgets/HomeScreen/components/HotProducts.dart';
@@ -32,7 +35,7 @@ class HomeScreen extends StatelessWidget {
             ),
             const SingleChildScrollView(
               child: Padding(
-                padding: EdgeInsets.all(8.0),
+                padding: EdgeInsets.all(10.0),
                 child: Column(
                   children: [
                     SizedBox(height: 50),
@@ -47,10 +50,14 @@ class HomeScreen extends StatelessWidget {
                       height: 10,
                     ),
                     HotProducts(),
+                    SizedBox(
+                      height: 10,
+                    )
                   ],
                 ),
               ),
-            )
+            ),
+            const BlurHeader(),
           ],
         ));
   }
